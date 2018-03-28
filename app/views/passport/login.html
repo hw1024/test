@@ -1,0 +1,36 @@
+<section class="container">
+	<div class="panel-body">
+     <form method="POST" action="/login">
+        <input type="text" id="name" name="name" value="chyingp" />
+        <input type="password" id="password" name="password" value="123456" />
+        <input type="submit" value="登录" id="login" />
+    </form> 
+	</div>
+</section>
+<div class="alert-tips" id="alert-tips"></div>
+<script type="text/javascript">
+  $('#login').click(function(evt){
+    evt.preventDefault();
+    $.ajax({
+        url: '/passport/ajax_login',
+        type: 'POST',
+        dataType:'json',
+        data: {
+            name: $('#name').val(),
+            password: $('#password').val()
+        },
+        success: function(data){
+          if(data.code == 200){
+            tips_message(data.message,'success'); 
+            setTimeout(function(){
+              window.location.href = '/contract/index';
+            },1000)   
+          } else {
+            tips_message(data.message,'error');
+          }
+        }
+    });
+  });
+</script>
+
+

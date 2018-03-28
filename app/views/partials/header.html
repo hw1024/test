@@ -1,0 +1,56 @@
+<div class="header">
+	<div class="header-top">
+		<div class="outer-w clearfix">
+			<ul class="fl clearfix">
+				<li class="custel">
+					<i class="custel-tel"></i>
+					<span>客服热线:&nbsp;</span>
+					<span>{{ telephone }}（{{ service_time }}）</span>
+				</li>
+			</ul>
+			<ul class="fr clearfix">
+				<li class="userinfo fl">
+					<a href="/users?menuid=home" id="hello" class="hello">您好，
+						<span id="phone" class="main-color">
+							用户
+						</span>
+					</a>
+				</li>
+				<li class="support fl" id="support-commond" data-support="<?=$support;?>">
+					<a data-support="problem" href="/about/problem">帮助中心</a>
+					<a data-support="newuser" href="/about/newuser">新手专区</a>
+					<a data-support="guide" href="/about/guide" class="support_last">银行存管操作指引</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<div class="header-nav">
+		<div class="outer-w clearfix">
+			<a class="nav-logo" href="/">
+				<img src="/images/logo.jpg?v={{version}}" alt="中普金服" title="中普金服">
+			</a>
+			<div class="nav-list fr">
+				<ul class="clearfix">
+					<li data-role="index">
+						<a href="/">首页</a>
+					</li>
+					<li data-role="lister">
+						<a href="/invest/lister">我要出借</a>
+					</li>
+					<li data-role="loan">
+						<a href="/loan/index">我要借款</a>
+					</li>
+					<li data-role="users">
+						<a href="/users?menuid=home">我的账户</a>
+					</li>
+					<li data-role="safe">
+						<a href="/safe/index">安全保障</a>
+					</li>
+					<li data-role="aboutus" class="nav-lastli">
+						<a href="/aboutus">信息披露</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>

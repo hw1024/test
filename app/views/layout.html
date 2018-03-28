@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>{{ title }}</title>
+	<meta name="renderer" content="webkit" />
+	<meta name="description" content="新手指南，介绍的全方位优势、项目运作流程以及出借流程，新人注册送现金豪礼，欢迎加入。"/>
+	<meta name="Keywords" content=",P2P网络金融,P2P借贷,个人债权转让,资产抵押借贷,出借流程,新人注册." />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta http-equiv="pragma" content="no-cache">
+	<link rel="stylesheet" type="text/css" href="/css/style.css?v={{version}}">
+	<script type="text/javascript" src="/js/jquery-2.0.3.min.js?v={{version}}"></script>
+	<script type="text/javascript" src="/js/require.js?v={{version}}"></script>
+	<script type='text/javascript'>
+		/**JS版本号 */
+		window.jsVersion = "{{version}}";
+		require.config({
+			//By default load any module IDs from js/lib
+			baseUrl: '/js/',
+			urlArgs: "v=" + window.jsVersion,
+			paths: {
+				"formValid": "formvalid",
+				"utility": "util"
+			},
+			shim: {},
+			waitSeconds: 0
+		});
+	</script>
+</head>
+<body>
+	{{>header}}
+    {{{body}}}
+	{{>footer}}
+	<script>
+		require(['pages/hj_base', 'utility'], function (B, Util) {
+			var utility = new Util();
+		});
+	</script>
+</body>
+</html>
+

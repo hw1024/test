@@ -1,0 +1,165 @@
+<section class="container">
+	<div class="page-header clearfix">
+		<h1 class="pull-left">产品信息</h1>
+		<a href="/contract/add" class="pull-right btn btn-primary">添加产品</a>
+	</div>
+	<form action="#" method="post" class="form-horizontal" id="product-form">
+		{{#each result}}
+		<div class="form-group">
+		    <label class="col-sm-3 control-label no-padding-right">合同类型<span class="text-red">*</span>：</label>
+		    <div class="col-sm-5">
+		    	<div class="select-box">
+		    		<select class="form-control" name="type" id="type">
+			            <option value="1" {{#if_eq type 1}}selected="selected"{{/if_eq}}>出借协议</option>
+			            <option value="2" {{#if_eq type 2}}selected="selected"{{/if_eq}}>补充协议</option>
+			        </select>
+			        <span class="caret"></span>
+		    	</div>
+		    </div>
+			<label class="radio-inline no-padding-left col-sm-4 hidden-xs"></label>
+		</div>
+		<div class="form-group">
+		    <label for="name" class="col-sm-3 control-label no-padding-right">产品名称<span class="text-red">*</span>：</label>
+		    <div class="col-sm-5">
+		      	<input type="text" class="form-control" id="name" name="name" value="{{ name }}" placeholder="请填写产品名称">
+		    </div>
+		    <label class="radio-inline no-padding-left col-sm-4 hidden-xs">（备注：输入产品的出借模式2~20字符，如：月鑫宝）</label>
+		</div>
+		<div class="form-group">
+		    <label for="rate" class="col-sm-3 control-label no-padding-right">建议年化收益率<span class="text-red">*</span>：</label>
+		    <div class="form-pre-feedback col-sm-5">
+		    	<div class="input-group">
+					<input type="text" class="form-control" id="rate" name="rate" value="{{ rate }}" placeholder="请填写建议年化收益率">
+					<div class="input-group-addon">%</div>
+			    </div>
+		    </div>
+			<label class="radio-inline no-padding-left col-sm-4 hidden-xs">（备注：年化收益不超过36.00%，可输入最多两位小数）</label>
+		</div>
+		<div class="form-group">
+		    <label for="date" class="col-sm-3 control-label no-padding-right">购买产品期限<span class="text-red">*</span>：</label>
+		    <div class="form-pre-feedback col-sm-5">
+		    	<div class="input-group">
+		    		<input type="text" class="form-control" id="date" name="date" value="{{ date }}" placeholder="请填写购买产品期限">
+		    		<div class="input-group-addon">月</div>
+		    	</div>
+		    </div>
+			<label class="radio-inline no-padding-left col-sm-4 hidden-xs">（备注：可输入0以上整数）</label>
+		</div>
+		<div class="form-group">
+		    <label for="price" class="col-sm-3 control-label no-padding-right">产品起投金额<span class="text-red">*</span>：</label>
+		    <div class="form-pre-feedback col-sm-5">
+		    	<div class="input-group">
+		    		<div class="input-group-addon">¥</div>
+		    		<input type="text" class="form-control" id="price" name="price" value="{{ price }}" placeholder="请填写产品起投金额">
+		    		<div class="input-group-addon">元</div>
+		    	</div>
+		    </div>
+			<label class="radio-inline no-padding-left col-sm-4 hidden-xs">（备注：可输入最多两位小数）</label>
+		</div>
+		<div class="form-group">
+		    <label class="col-sm-3 control-label no-padding-right">产品启用状态<span class="text-red">*</span>：</label>
+		    <div class="col-sm-5">
+		    	<label class="radio-inline">
+					<input type="radio" name="status" value="2" {{#if_eq status 2}}checked="checked"{{/if_eq}}>暂不启用
+				</label>
+				<label class="radio-inline form-control-radio">
+					<input type="radio" name="status" value="1" {{#if_eq status 1}}checked="checked"{{/if_eq}}>启用
+				</label>
+		    </div>
+			<label class="radio-inline no-padding-left col-sm-4 hidden-xs"></label>
+		</div>
+		<div class="form-group">
+		    <div class="col-sm-offset-3 col-sm-10 col-xs-12">
+		      <button type="button" id="product-btn" class="btn btn-info col-xs-12 col-sm-5 col-md-5">修改信息</button>
+		    </div>
+		</div>
+		<input type="hidden" name="id" value="{{ id }}"> 
+		{{/each}}
+	</form>
+</section>
+<div class="alert-tips" id="alert-tips"></div>
+<script>
+  $('#product-btn').click(function(){
+    var that = $(this);
+    var bootstrapValidator = $("#product-form").data('bootstrapValidator');
+    bootstrapValidator.validate();
+    if(bootstrapValidator.isValid()){
+      var data=$('#product-form').serialize();
+      var submitData=decodeURIComponent(data,true);
+      console.log(submitData);
+      that.attr("disabled",true);
+      $.ajax({
+          type: "POST",
+          url: "/contract/process_updata",
+          dataType:'json',
+          data: submitData,
+          success: function(data){
+          	that.attr("disabled",false);
+            tips_message(data.message,'success');
+            setTimeout(function(){
+            	window.location.href = "/contract/index"
+            },2000)
+          }
+      });
+    }
+  });
+  $(function() {
+    $('#product-form')
+    .bootstrapValidator({
+      message: 'This value is not valid',
+      feedbackIcons: {
+        valid: 'glyphicon glyphicon-ok',
+        invalid: 'glyphicon glyphicon-remove',
+        validating: 'glyphicon glyphicon-refresh'
+      },
+      excluded:[":disabled"],
+      fields: {
+        name: {
+          message: 'The name is not valid',
+          validators: {
+              notEmpty: {
+                message: '产品名称不能为空！'
+              },
+          }
+        },
+        rate: {
+          message: 'The rate is not valid',
+          validators: {
+            notEmpty: {
+              message: '建议年化收益率不能为空！'
+            },
+            regexp: {
+              regexp: /^\d+(?:\.\d{1,2})?$/,
+              message: '收益率只能输入正数并且小数点后不能超过两位'
+            }
+          }
+        },
+        date: {
+          message: 'The date is not valid',
+          validators: {
+            notEmpty: {
+              message: '购买产品期限不能为空！'
+            },
+            regexp: {
+              regexp: /^[1-9]*$/,
+              message: '购买产品期限只能输入0以上整数'
+            }
+          }
+        },
+        price: {
+          message: 'The price is not valid',
+          validators: {
+            notEmpty: {
+              message: '产品起投金额不能为空！'
+            },
+            regexp: {
+              regexp: /^\d+(?:\.\d{1,2})?$/,
+              message: '产品起投金额只能输入正数并且小数点后不能超过两位'
+            }
+          }
+        },
+      }
+    })
+  })
+</script>
+

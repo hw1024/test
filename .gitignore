@@ -1,0 +1,14 @@
+#忽略dev 开发目录
+#忽略 src 目录
+node_modules/
+nbproject/
+src/
+data/
+dev/
+deploy
+.idea/
+release.sh
+sftp-config.json
+resources/pc/.sass-cache/
+resources/pc/css/style.css.map
+application/config/database.php
