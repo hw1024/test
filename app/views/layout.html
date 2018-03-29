@@ -4,23 +4,25 @@
 	<meta charset="UTF-8">
 	<title>{{ title }}</title>
 	<meta name="renderer" content="webkit" />
-	<meta name="description" content="新手指南，介绍的全方位优势、项目运作流程以及出借流程，新人注册送现金豪礼，欢迎加入。"/>
-	<meta name="Keywords" content=",P2P网络金融,P2P借贷,个人债权转让,资产抵押借贷,出借流程,新人注册." />
+	<meta name="description" content="{{ product_name }},P2P理财,P2P网贷,投资理财,网贷平台,P2P投资理财平台,深圳网贷平台"/>
+	<meta name="Keywords" content="{{ product_name }}总部位于{{ company_address }}，是国内首批完成银行资金存管的P2P理财平台，是互联网金融可靠的安全投资理财品牌，为投资者提供车贷、房贷、中小企业贷等优质P2P理财产品" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<meta http-equiv="pragma" content="no-cache">
-	<link rel="stylesheet" type="text/css" href="/css/style.css?v={{version}}">
-	<script type="text/javascript" src="/js/jquery-2.0.3.min.js?v={{version}}"></script>
-	<script type="text/javascript" src="/js/require.js?v={{version}}"></script>
+	<link rel="stylesheet" type="text/css" href="/css/style.css?v={{ version }}">
+	<script type="text/javascript" src="/js/jquery-2.0.3.min.js?v={{ version }}"></script>
+	<script type="text/javascript" src="/js/require.js?v={{ version }}"></script>
 	<script type='text/javascript'>
 		/**JS版本号 */
-		window.jsVersion = "{{version}}";
+		window.jsVersion = "{{ version }}";
 		require.config({
 			//By default load any module IDs from js/lib
 			baseUrl: '/js/',
 			urlArgs: "v=" + window.jsVersion,
 			paths: {
 				"formValid": "formvalid",
-				"utility": "util"
+				"utility": "util",
+				"echarts": 'plugin/echarts.min',
+				"slide": 'plugin/superslide.min',
 			},
 			shim: {},
 			waitSeconds: 0

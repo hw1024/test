@@ -8,7 +8,6 @@ var exphbs = require('express-handlebars');
 var hbsHelper = require('./utils/hbsHelper');
 var commonConfig = require('./config/common_config');
 
-var base = require('./routes/base');
 var index = require('./routes/index');
 var contract = require('./routes/contract');
 var passport = require('./routes/passport');
