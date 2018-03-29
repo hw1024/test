@@ -3,12 +3,12 @@
         <div class="outer-w platform-container aboutus-border" style="background-color:#fff;">
             <div class="borrower">
                 <div class="platform-title">
-                    <h3>借款人数据</h3>
+                    <h3>借款人数据{{ isLogin }}</h3>
                 </div>
                 <div class="borrower-con clearfix">
                     <div class="platform-time">
                         <i>●</i>数据截止至：
-                        <span id="now_time_four">2018-03-28 23:59:59</span>
+                        <span id="now_time_four">{{ time }}</span>
                     </div>
                     <div class="round fl">
                         <div id="borChart" style="width: 450px;height:380px;"></div>
@@ -16,20 +16,50 @@
                     <div class="borrower-list fr">
                         <ul class="clearfix">
                             <li>
-                                <h4 id="avgEach">111509.73</h4>
+                                <h4 id="avgEach">{{ avg_each }}</h4>
                                 <p>当前笔均借款余额</p>
                             </li>
                             <li>
-                                <h4 id="borrowerNum">1004</h4>
+                                <h4 id="borrowerNum">{{ borrow_num }}</h4>
                                 <p>当前借款人数量</p>
                             </li>
                             <li class="last-borrower">
-                                <h4 id="avgBorrow">111842.93</h4>
+                                <h4 id="avgBorrow">{{ avg_borrow }}</h4>
                                 <p>人均借款余额</p>
                             </li>
                         </ul>
                     </div>
                 </div>
+            </div>
+            <div class="panel-body">
+                <table id="table" class="table">
+                    <tr>
+                        <th data-field="id">产品ID</th>
+                        <th data-field="name">产品名称</th>
+                        <th data-field="type">协议类型</th>
+                        <th data-field="rate">年化收益率</th>
+                        <th data-field="date">购买期限(月)</th>
+                        <th data-field="price">起投金额</th>
+                        <th data-field="status">状态</th>
+                        <th data-field="operation">操作</th>
+                    </tr>
+                    {{#each result}}
+                    <tr>
+                        <td>{{ id }}</td>
+                        <td>{{ name }}</td>
+                        <td>{{ type }}</td>
+                        <td>{{ rate }}</td>
+                        <td>{{ date }}</td>
+                        <td>{{ price }}</td>
+                        <td>{{ status }}</td>
+                        <td>
+                            <a href="/contract/detail/{{ id }}">详情</a>&nbsp;&nbsp;&nbsp;
+                            <a href="/contract/edit/{{ id }}">编辑</a>&nbsp;&nbsp;&nbsp;
+                            <a href="javascript:void(0);" data-id="{{ id }}" id="product-del">删除</a>
+                        </td>
+                    </tr>
+                    {{/each}}
+                </table>
             </div>
         </div>
     </div>
@@ -38,7 +68,7 @@
 	require(['pages/hj_echarts', 'utility'], function (E, Util) {
         var utility = new Util();
         var borrow_color = ["#F78F29", "#FFC000", "#5870FF"];
-        var borrow_num = [1000.00, 10.00, 100.00];
+        var borrow_num = ['{{ borrow_array1 }}', '{{ borrow_array2 }}', '{{ borrow_array3 }}'];
         var borrow_txt = ["最大单户借款余额占比", "前十借款大户2-10名占比", "其他"];
         E.pieChart({id: "borChart", text: "借款余额占比", ec_color: borrow_color, ec_num: borrow_num, ec_txt: borrow_txt, center_l: "50%", center_r: "40%"});
         utility.advertpopFn('/images/notice-end2.png?{{ version }}', true)

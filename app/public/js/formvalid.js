@@ -10,6 +10,7 @@ define(['module', "utility"], function(module, Util) {
      */
     function formValid() {}
     var utility = new Util();
+
     formValid.prototype.formObj = function(form) {
         var _self = this;
         _self.tel = $(form).find("input[name='mobile'],input[name='reserve_phone']");
@@ -20,24 +21,7 @@ define(['module', "utility"], function(module, Util) {
         _self.num = $(form).find("input[name='num']");
     }
     formValid.prototype.init = function(form) {
-        // var _self = this;
-        // _self.formObj(form);
-        // var ml = _self.tel.length,
-        //     pl = _self.pwd.length,
-        //     rpl = _self.repwd.length,
-        //     sl = _self.sub.length;
-        // _self.tel.on("blur", function() {
-        //     var v = $(this).val();
-        //     _self.isMobile(v);
-        // });
-        // _self.pwd.on("blur", function() {
-        //     var v = $(this).val();
-        //     _self.isPwd(v);
-        // });
-        // _self.repwd.on("blur", function() {
-        //     var v = $(this).val();
-        //     _self.isRepwd(v);
-        // });
+        var _self = this;
     };
     formValid.prototype.isMobile = function(s) {
         var _self = this;
@@ -280,49 +264,6 @@ define(['module', "utility"], function(module, Util) {
                 })
             }
         }
-        /**
-         * 浮层提示
-         * @method tipsWarn
-         * @param {String} str 提示文字
-         * @param {String} time 显示时长
-         */
-    // formValid.prototype.tipsWarn = function(str, time) {
-    //         var tipsWrap = $("<div class='alert_tips'><p class='time_01 fadeDown'>" + str + "</p></div>");
-    //         var timenum = time || 2500,
-    //             tips = $(".alert_tips"),
-    //             tips_len = tips.size(),
-    //             num = 0;
-    //         if (tips_len > 0) {
-    //             tips.find("p").html(str);
-    //             clearTimeout(window.timmer);
-    //             num = 0;
-    //             window.timmer = setInterval(function() {
-    //                 num += 100;
-    //                 if (num > timenum) {
-    //                     tips.removeClass('active');
-    //                     clearInterval(window.timmer);
-    //                     setTimeout(function() {
-    //                         tips.remove();
-    //                     }, 500);
-    //                 }
-    //             }, 100);
-    //         } else {
-    //             $("body").append(tipsWrap);
-    //             setTimeout(function() {
-    //                 tipsWrap.addClass('active');
-    //             }, 200);
-    //             window.timmer = setInterval(function() {
-    //                 num += 100;
-    //                 if (num > timenum) {
-    //                     tipsWrap.removeClass('active');
-    //                     clearInterval(window.timmer);
-    //                     setTimeout(function() {
-    //                         tipsWrap.remove();
-    //                     }, 500);
-    //                 }
-    //             }, 100);
-    //         }
-    //     }
         /**
          * 发送短信验证码
          * @param  {String} btn        发送按钮

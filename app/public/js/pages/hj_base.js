@@ -16,7 +16,6 @@ define(["module", "utility"], function(module, Util) {
      */
     hjBase.prototype.init = function() {
         var _self = this;
-        console.log(1)
     }
     module.exports = new hjBase();
 });

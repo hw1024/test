@@ -10,49 +10,11 @@ define(["require", 'module'], function(require, module) {
      */
     function Util() {}
     /**
-     * 浮层提示
-     * @method 
-     * @param {String} str 提示文字
-     * @param {String} time 显示时长
+     * roundFixed  保留小数点
+     * @param  {[type]} num     [description]
+     * @param  {[type]} point   [description]
+     * @return {[type]}         [description]
      */
-    Util.prototype.tipsWarn = function (str, time) {
-        var tipsWrap = $("<div class='alert_tips'><p class='time_01 fadeDown'>" + str + "</p></div>");
-        var timenum = time || 2500,
-            tips = $(".alert_tips"),
-            tips_len = tips.size(),
-            num = 0;
-        if (tips_len > 0) {
-            tips.find("p").html(str);
-            clearTimeout(window.timmer);
-            num = 0;
-            window.timmer = setInterval(function () {
-                num += 100;
-                if (num > timenum) {
-                    tips.removeClass('active');
-                    clearInterval(window.timmer);
-                    setTimeout(function () {
-                        tips.remove();
-                    }, 500);
-                }
-            }, 100);
-        } else {
-            $("body").append(tipsWrap);
-            setTimeout(function () {
-                tipsWrap.addClass('active');
-            }, 200);
-            window.timmer = setInterval(function () {
-                num += 100;
-                if (num > timenum) {
-                    tipsWrap.removeClass('active');
-                    clearInterval(window.timmer);
-                    setTimeout(function () {
-                        tipsWrap.remove();
-                    }, 500);
-                }
-            }, 100);
-        }
-    }
-
     Util.prototype.roundFixed = function (num, point) {
         if (isNaN(num)) {
             return null;
@@ -67,6 +29,69 @@ define(["require", 'module'], function(require, module) {
         }
         return result.toFixed(+p);
     }
+    /**
+     * stopPropagation  
+     * @param  {[type]} e event
+     * @return {[type]}         [description]
+     */
+    Util.prototype.stopPropagation = function (e) {
+        e = e || window.event;
+        if (e.stopPropagation) { //W3C阻止冒泡方法
+            e.stopPropagation();
+        } else {
+            e.cancelBubble = true; //IE阻止冒泡方法
+        }
+    }
+    /**
+     * textSlide
+     * @param  {[type]}    list
+     * @param  {[type]}    time
+     * @return {[type]}    [description]
+     */
+    Util.prototype.textSlide = function (list, time) {
+        var first = $(list).find("li").eq(0).clone();
+        $(list).find("ul").append(first);
+        var aL = Number($(list).find("li").length),
+            ah = $(list).find("li").height();
+        var b = 0;
+        var timer = null;
+        function sss() {
+            b++;
+            if (b < aL) {
+                if (b == (aL - 1)) {
+                    $(list).find("ul").animate({
+                        "top": -b * ah + "px"
+                    }, 400);
+                    setTimeout(function () {
+                        $(list).find("ul").css({
+                            "top": "0"
+                        });
+                    }, 500);
+                } else {
+                    $(list).find("ul").animate({
+                        "top": -b * ah + "px"
+                    }, 400);
+                }
+            } else {
+                b = 1;
+                $(list).find("ul").animate({
+                    "top": -b * ah + "px"
+                }, 400);
+            }
+        }
+        timer = setInterval(sss, time);
+        $(list).on("mouseover", function () {
+            clearInterval(timer)
+        })
+        $(list).on("mouseleave", function () {
+            timer = setInterval(sss, time);
+        })
+    }
+    /**
+     * serializeNestedObject  输出序列化表单
+     * @param  {[type]} obj     [description]
+     * @return {[type]}         [description]
+     */
     Util.prototype.serializeNestedObject = function (obj) {
         var json = {};
         var arrObj = $(obj).serializeArray();
@@ -123,7 +148,7 @@ define(["require", 'module'], function(require, module) {
      * @param  {[type]} id      [description]
      * @param  {[type]} img     [description]
      * @param  {[type]} conut   [description]
-     * @return {[type]}          [description]
+     * @return {[type]}         [description]
      */
     Util.prototype.advertpopFn = function (img, conut) {
         var that = this;
@@ -202,7 +227,6 @@ define(["require", 'module'], function(require, module) {
         leftTime.setTime(leftTamp + curTamp);
         document.cookie = name + "=" + escape(value) + ";expires=" + leftTime.toGMTString();
     }
-
     /**
      * get cookie, non-comment use
      *

@@ -8,8 +8,9 @@ var filter = require('../config/filter');
 router.get('/index', filter.authorize, function(req, res, next) {
 	var modSql = 'SELECT * FROM websites';
 	connection.query(modSql,function (err, result) {
-	  res.render('contract/index', {title: '产品列表',result: result});
+	  
 	});
+	res.render('contract/index', {title: '产品列表',result: result});
 });
 
 router.get('/add', filter.authorize, function(req, res, next) {

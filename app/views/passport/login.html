@@ -20,10 +20,9 @@
             password: $('#password').val()
         },
         success: function(data){
-          if(data.code == 200){
-            tips_message(data.message,'success'); 
+          if(data.code == 200){ 
             setTimeout(function(){
-              window.location.href = '/contract/index';
+              window.location.href = '/';
             },1000)   
           } else {
             tips_message(data.message,'error');
