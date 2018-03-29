@@ -35,10 +35,12 @@
     </div>
 </section>
 <script type="text/javascript">
-	require(['pages/hj_echarts'], function (E) {
+	require(['pages/hj_echarts', 'utility'], function (E, Util) {
+        var utility = new Util();
         var borrow_color = ["#F78F29", "#FFC000", "#5870FF"];
         var borrow_num = [1000.00, 10.00, 100.00];
         var borrow_txt = ["最大单户借款余额占比", "前十借款大户2-10名占比", "其他"];
         E.pieChart({id: "borChart", text: "借款余额占比", ec_color: borrow_color, ec_num: borrow_num, ec_txt: borrow_txt, center_l: "50%", center_r: "40%"});
+        utility.advertpopFn('/images/notice-end2.png?{{ version }}', true)
 	});
 </script>
