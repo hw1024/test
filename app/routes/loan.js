@@ -3,10 +3,9 @@ var router = express.Router();
 var bodyParser = require('body-parser');
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
 var connection = require('../config/database');
-var filter = require('../config/filter');
 
 /* GET home page. */
-router.get('/', filter.authorize, function (req, res, next) {
+router.get('/index', function (req, res, next) {
     var modSql = 'SELECT * FROM websites';
     connection.query(modSql, function (err, result) {
         res.locals = {
@@ -19,7 +18,7 @@ router.get('/', filter.authorize, function (req, res, next) {
             borrow_array2: '10.01',
             borrow_array3: '100.30'
         }
-        res.render('index', { title: '首页',header_role: 'index' });
+        res.render('loan/index', { title: '我要借款', header_role: 'loan' });
     });
 });
 

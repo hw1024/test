@@ -953,7 +953,7 @@ circle:nth-child(12n + 12) {
     margin-top: 10px; }
     .header .header-nav .nav-list ul li {
       float: left;
-      margin-right: 40px;
+      width: 110px;
       position: relative; }
     .header .header-nav .nav-list ul li.nav-lastli {
       margin-right: 0; }
@@ -9070,5 +9070,22 @@ circle:nth-child(12n + 12) {
         border: 0;
         padding: 0;
         max-width: none; }
-
-/*# sourceMappingURL=style.css.map */
+.header .header-nav .nav-list ul li:before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    right:50%;
+    bottom: 0;
+    background: #ff6000;
+    height: 2px;
+    -webkit-transition-property: 'left, right';
+    transition-property: 'left, right';
+    -webkit-transition-duration: .5s;
+    transition-duration: .5s;
+    -webkit-transition-timing-function: ease-out;
+    transition-timing-function: ease-out;
+}
+.header .header-nav .nav-list ul li.active:before, .header .header-nav .nav-list ul li:hover:before {
+  left: 10px;
+  right: 10px;
+}

@@ -9,7 +9,11 @@ var hbsHelper = require('./utils/hbsHelper');
 var commonConfig = require('./config/common_config');
 
 var index = require('./routes/index');
-var contract = require('./routes/contract');
+var invest = require('./routes/invest');
+var loan = require('./routes/loan');
+var users = require('./routes/users');
+var aboutus = require('./routes/aboutus');
+var about = require('./routes/about');
 var passport = require('./routes/passport');
 var session = require('express-session');
 var FileStore = require('session-file-store')(session);
@@ -53,7 +57,11 @@ app.use(session({
   }
 }));
 app.use('/', index);
-app.use('/contract', contract);
+app.use('/invest', invest);
+app.use('/loan', loan);
+app.use('/users', users);
+app.use('/aboutus', aboutus);
+app.use('/about', about);
 app.use('/passport', passport);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

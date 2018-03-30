@@ -31,23 +31,20 @@
 			</a>
 			<div class="nav-list fr">
 				<ul class="clearfix">
-					<li data-role="index">
+					<li class="{{#if_eq header_role 'index'}}active{{/if_eq}}">
 						<a href="/">首页</a>
 					</li>
-					<li data-role="lister">
+					<li class="{{#if_eq header_role 'invest'}}active{{/if_eq}}">
 						<a href="/invest/lister">我要出借</a>
 					</li>
-					<li data-role="loan">
+					<li class="{{#if_eq header_role 'loan'}}active{{/if_eq}}">
 						<a href="/loan/index">我要借款</a>
 					</li>
-					<li data-role="users">
-						<a href="/users?menuid=home">我的账户</a>
+					<li class="{{#if_eq header_role 'users'}}active{{/if_eq}}">
+						<a href="/users/index">我的账户</a>
 					</li>
-					<li data-role="safe">
-						<a href="/safe/index">安全保障</a>
-					</li>
-					<li data-role="aboutus" class="nav-lastli">
-						<a href="/aboutus">信息披露</a>
+					<li class="{{#if_eq header_role 'aboutus'}}active{{/if_eq}} nav-lastli">
+						<a href="/aboutus/index">信息披露</a>
 					</li>
 				</ul>
 			</div>
