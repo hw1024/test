@@ -59,10 +59,9 @@ app.use(session({
 }));
 // 获取用户信息 
 app.all('*', function (req, res, next) {
-  console.log(req.originalUrl)
   let userName = req.session.loginUser;
   let originalUrl = req.originalUrl;
-  var levelHead = minimatch(originalUrl, '/passport/**');
+  let levelHead = minimatch(originalUrl, '/passport/**');
   app.locals.levelHead = levelHead;
   app.locals.phone_show = userName;
   next()

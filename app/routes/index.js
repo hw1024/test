@@ -2,12 +2,12 @@ var express = require('express');
 var router = express.Router();
 var bodyParser = require('body-parser');
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
-var connection = require('../config/database');
-
+var BaseModel = require('../config/base_model');
+var baseModel = new BaseModel();
 /* GET home page. */
 router.get('/', function (req, res, next) {
-    var modSql = 'SELECT * FROM websites';
-    connection.query(modSql, function (err, result) {
+    var tableName = 'websites';
+    baseModel.fineAllData(tableName, function(result) {
         res.locals = {
             result: result,
             time: '2018-03-28 23:59:59',
@@ -18,8 +18,8 @@ router.get('/', function (req, res, next) {
             borrow_array2: '10.01',
             borrow_array3: '100.30'
         }
-        res.render('index', { title: '首页',header_role: 'index' });
-    });
+        res.render('index', { title: '首页', header_role: 'index' });
+    })
 });
 
 module.exports = router;

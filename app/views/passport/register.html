@@ -1,54 +1,60 @@
-<section>
- <div class="container">
-        <form class="col-sm-offset-4 col-sm-4 form-horizontal" role="form" method="post" onsubmit="return false">
-            <fieldset>
-                <legend></legend>
-                <div class="panel panel-default">
-                <div class="panel-heading">
-                    <p class="tc">注册信息</p>
+<section class="ksx-container">
+<div class="passport-container">
+    <div class="register-box">
+        <div class="register-content outer-w">
+            <div class="hd-title">
+                <h3>欢迎注册</h3>
+                <span class="more">已有账号，
+                    <a href="/passport/login" class="main-color">登录</a>
+                </span>
+            </div>
+            <div class="register-wrap clearfix">
+                <div class="register-form fl">
+                    <form name="reg" id="reg" action="/passport/register_sure" method="POST">
+                        <ul class="txt-form">
+                            <li>
+                                <i class="icon-mobile"></i>
+                                <input type="text" name="mobile" id="mobile" placeholder="请输入您的手机号">
+                                <input type="hidden" name="callback" value="{{ callback }}>">
+                            </li>
+                            <li>
+                                <i class="icon-pwd"></i>
+                                <input class="inputFocus" type="password" id="password" name="passport" placeholder="请设置8-20位密码,至少包含字母和数字">
+                            </li>
+                            <li>
+                                <i class="icon-pwd"></i>
+                                <input class="inputFocus" type="password" id="password1" name="password1" placeholder="请确认设置的8-20位密码">
+                            </li>
+                            <li>
+                                <i class="icon-code"></i>
+                                <input type="text" name="invite_code" value="" class="inputFocus" placeholder="邀请码(非必填)">
+                            </li>
+                            <li class="spe">
+                                <input type="checkbox" checked="checked" class="chk">我已阅读并同意
+                                <a href="/passport/agreement_saft" target="_blank">《中普金服注册服务协议》</a>
+                                <a target="_blank" href="/passport/agreement_infoss">《借款协议》</a>
+                            </li>
+                            <li>
+                                <div class="y-btn" id="reg-sub">提交并注册</div>
+                            </li>
+                            <p class="tips"></p>
+                        </ul>
+                    </form>
                 </div>
-                <div class="panel-body m15">
-                <div class="form-group">
-                    <div class="input-group">
-                        <span class="input-group-addon">
-                        <span class="glyphicon glyphicon-user"></span>
-                        </span>
-                        <input type="text" class="form-control" id="username" name="username" placeholder="请输入用户名" required>
-                    </div>
+                <div class="register-banner fr">
+                    <a href="javascript:void(0);" target="_blank">
+                        <img src="/images/register-banner.jpg?v={{ version }}" alt="res">
+                    </a>
                 </div>
-                <div class="form-group">
-                    <div class="input-group">
-                        <span class="input-group-addon">
-                        <span class="glyphicon glyphicon-lock"></span>
-                        </span>
-                        <input type="text" class="form-control" id="password" name="password" placeholder="请输入密码" required>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="input-group">
-                        <span class="input-group-addon">
-                        <span class="glyphicon glyphicon-lock"></span>
-                        </span>
-                        <input type="text" class="form-control" id="password1" name="password1" placeholder="请再次输入密码" required>
-                    </div>
-                </div>
-                <div class="form-group">
-                        <button type="submit" class="btn btn-primary btn-block" id="register1">注册</button>
-                </div>
-                <div class="form-group">
-                        <button type="button" class="btn btn-info col-sm-2 col-sm-offset-10" id="login1">登录</button>
-                </div>
-                </div>
-                </div>
-            </fieldset>
-        </form>
+            </div>
+        </div>
     </div>
+</div>
 </section>
-<div class="alert-tips" id="alert-tips"></div>
 <script>
   $(function () {
-     $("#register1").click(function(){ 
-            var username = $("#username").val();
+     $("#reg-sub").click(function(){ 
+            var username = $("#mobile").val();
             var password = $("#password").val();
             var password1 = $("#password1").val();
             if(password !== password1){ 

@@ -12,6 +12,39 @@
             <ul></ul>
         </div>
         <div class="position-index">
+             {{#if phone_show}}
+            <div class="position-banner3">
+                <span class="position-span"></span>
+                <div class="banner3-name">
+                    您好！
+                    <span>
+                        {{ phone_show }}
+                    </span>
+                </div>
+                <div class="banner3-price clearfix">
+                    <span>可用余额:
+                        <var>
+                            1000
+                        </var>元</span>
+                    <a href="/recharge">去充值></a>
+                </div>
+                <div class="banner3-cards clearfix">
+                    <span>可用代金券:
+                    <var>
+                        12
+                    </var>个</span>
+                    <a href="/cards/lister">去查看></a>
+                </div>
+                <div class="banner3-price clearfix">
+                    <span>预期出借收益:
+                    <var>
+                        12300
+                    </var>元</span>
+                    <a href="/accounts/tenders">去查看></a>
+                </div>
+                <a href="/users/index" class="Myaccount">进入账户</a>
+            </div>
+            {{else}}
             <div class="position-banner">
                 <span class="position-span"></span>
                 <div class="banner-ts">
@@ -25,10 +58,11 @@
                     <h2>用户资金由银行全程存管</h2>
                     <a href="/passport/register" class="regist">立即注册</a>
                     <h3>已有账号，
-                        <a href="/passport" class="main-color">马上登录</a>
+                        <a href="/passport/login" class="main-color">马上登录</a>
                     </h3>
                 </div>
             </div>
+             {{/if}}
             <div class="position-banner2">
                 <img src="/images/code_app.png?v={{version}}" alt="下载手机App">
                 <h3>下载手机App</h3>

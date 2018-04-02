@@ -1,0 +1,9 @@
+
+{
+    "host": "localhost",
+    "user": "root",
+    "password": "root",
+    "database": "ceshi",
+    "dbName": "websites",
+    "chart": "utf-8"
+}
