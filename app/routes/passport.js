@@ -6,7 +6,8 @@ var connection = require('../config/database');
 
 /* GET home page. */
 router.get('/login', function(req, res, next) {
-  res.render('passport/login', {title: '登录'});
+  var redir = req.query.redir || '/';
+  res.render('passport/login', { title: '登录', callback: redir});
 });
 
 router.get('/register', function(req, res, next) {
@@ -25,13 +26,14 @@ router.get('/logout', function(req, res, next){
         }
         // req.session.loginUser = null;
         //res.clearCookie(identityKey);
-        res.redirect('/passport/login');
+        res.redirect('/');
     });
 });
 
 router.post('/ajax_login', function(req, res, next){
   var  name = req.body.name;
   var  pwd = req.body.password;
+  var  callback = req.body.callback;
   // req.assert('name', 'Name is required').notEmpty();
   // req.assert('pwd', 'pwd is required').notEmpty();
   // var errors = req.validationErrors();  
@@ -52,7 +54,7 @@ router.post('/ajax_login', function(req, res, next){
                 return res.json({code: 300, message: '登录失败'});                
               }
               req.session.loginUser = name;
-              res.json({code: 200, message: '登录成功'});                           
+              res.json({ code: 200, message: '登录成功', url: callback});                         
             });   
           } else {
             res.json({code: 300, message: '账号或密码错误'});       

@@ -2887,7 +2887,7 @@ circle:nth-child(12n + 12) {
         font-size: 12px;
         padding-left: 24px;
         margin-bottom: 10px;
-        background: url(../../pc/image/error.png) no-repeat 4px center; }
+        background: url(../images/error.png) no-repeat 4px center; }
     .detail-container .detail-content .flab-item {
       width: 320px;
       padding: 40px 0 30px;
@@ -4690,7 +4690,7 @@ circle:nth-child(12n + 12) {
     position: absolute;
     top: 14px;
     left: 18px;
-    background: url(../../pc/image/passport-bg.png) no-repeat; }
+    background: url(../images/passport-bg.png) no-repeat; }
   .passport-container li i.icon-mobile {
     width: 16px;
     height: 28px;
@@ -4804,7 +4804,7 @@ circle:nth-child(12n + 12) {
   color: #ff6000;
   font-size: 12px;
   margin-bottom: 10px;
-  background: url(../../pc/image/error.png) no-repeat 4px 7px; }
+  background: url(../images/error.png) no-repeat 4px 7px; }
 
 .register-box {
   margin-top: 20px; }
@@ -4933,7 +4933,7 @@ circle:nth-child(12n + 12) {
           width: 15px;
           height: 15px;
           margin-right: 10px;
-          background: url(../../pc/image/passport-bg.png) no-repeat;
+          background: url(../images/passport-bg.png) no-repeat;
           background-position: -8px -176px; }
         .reg-success .success-lower .lower-l .bind .bind-r .ident-btn {
           padding: 0 20px;
@@ -5900,7 +5900,7 @@ circle:nth-child(12n + 12) {
       height: 32px;
       margin-right: 20px;
       vertical-align: -7px;
-      background: url("../../pc/image/process.png") no-repeat; }
+      background: url("../images/process.png") no-repeat; }
   .process-container p {
     font-size: 18px;
     color: #666;
@@ -6218,23 +6218,23 @@ circle:nth-child(12n + 12) {
       height: 38px;
       vertical-align: bottom; }
     .aboutus-container .aboutus-h1 .aboutus-icon-important {
-      background: url(../../pc/image/aboutus/important-icon.png) no-repeat; }
+      background: url(../images/aboutus/important-icon.png) no-repeat; }
     .aboutus-container .aboutus-h1 .aboutus-icon-risk {
-      background: url(../../pc/image/aboutus/risk-icon.png) no-repeat; }
+      background: url(../images/aboutus/risk-icon.png) no-repeat; }
     .aboutus-container .aboutus-h1 .aboutus-icon-education {
-      background: url(../../pc/image/aboutus/education-icon.png) no-repeat; }
+      background: url(../images/aboutus/education-icon.png) no-repeat; }
     .aboutus-container .aboutus-h1 .aboutus-icon-knowledge {
-      background: url(../../pc/image/aboutus/know-icon.png) no-repeat; }
+      background: url(../images/aboutus/know-icon.png) no-repeat; }
     .aboutus-container .aboutus-h1 .aboutus-icon-bank {
-      background: url(../../pc/image/aboutus/bank-icon.png) no-repeat; }
+      background: url(../images/aboutus/bank-icon.png) no-repeat; }
     .aboutus-container .aboutus-h1 .aboutus-icon-record {
-      background: url(../../pc/image/aboutus/record-icon.png) no-repeat; }
+      background: url(../images/aboutus/record-icon.png) no-repeat; }
     .aboutus-container .aboutus-h1 .aboutus-icon-we {
-      background: url(../../pc/image/aboutus/we-icon.png) no-repeat; }
+      background: url(../images/aboutus/we-icon.png) no-repeat; }
     .aboutus-container .aboutus-h1 .aboutus-icon-adress {
-      background: url(../../pc/image/aboutus/adress-icon.png) no-repeat; }
+      background: url(../images/aboutus/adress-icon.png) no-repeat; }
     .aboutus-container .aboutus-h1 .aboutus-icon-plat {
-      background: url(../../pc/image/aboutus/plat-icon.png) no-repeat; }
+      background: url(../images/aboutus/plat-icon.png) no-repeat; }
     .aboutus-container .aboutus-h1 h2 {
       font-size: 18px;
       font-weight: normal; }
@@ -8013,7 +8013,7 @@ circle:nth-child(12n + 12) {
       color: #ff6000;
       font-size: 12px;
       margin-bottom: 10px;
-      background: url(../../pc/image/error.png) no-repeat 4px 5px; }
+      background: url(../images/error.png) no-repeat 4px 5px; }
     .debtright-apply .debtright-apply-lower .apply-tips {
       color: #999;
       font-size: 12px;
@@ -8046,7 +8046,7 @@ circle:nth-child(12n + 12) {
       height: 32px;
       margin-right: 20px;
       vertical-align: -7px;
-      background: url("../../pc/image/process.png") no-repeat; }
+      background: url("../images/process.png") no-repeat; }
   .debt-process img {
     width: 177px;
     height: 182px;
@@ -8410,7 +8410,7 @@ circle:nth-child(12n + 12) {
 .process-container .handle-banner {
   width: 100%;
   height: 750px;
-  background: url(../../pc/image/guide/banner-about.jpg) no-repeat center top; }
+  background: url(../images/guide/banner-about.jpg) no-repeat center top; }
 .process-container .handle-video {
   position: absolute;
   left: 50%;
@@ -8418,7 +8418,7 @@ circle:nth-child(12n + 12) {
   margin-left: -428px;
   width: 856px;
   height: 482px;
-  background: url(../../pc/image/guide/handle-video.png) no-repeat 0 0; }
+  background: url(../images/guide/handle-video.png) no-repeat 0 0; }
   .process-container .handle-video video {
     position: relative;
     top: 17px;
@@ -8434,7 +8434,7 @@ circle:nth-child(12n + 12) {
     cursor: pointer; }
 .process-container .handle-tab {
   background-color: #ffe9c1;
-  background-image: url(../../pc/image/guide/yun-02.png);
+  background-image: url(../images/guide/yun-02.png);
   background-repeat: no-repeat;
   background-size: contain;
   position: relative; }
@@ -8531,7 +8531,7 @@ circle:nth-child(12n + 12) {
     line-height: 130px;
     font-size: 24px;
     color: #666;
-    background: url(../../pc/image/guide/handle-icon.png) no-repeat 0 -872px; }
+    background: url(../images/guide/handle-icon.png) no-repeat 0 -872px; }
     .process-container .handle-tab .handle-tab-btn a i {
       position: absolute;
       top: 50%;
@@ -8539,14 +8539,14 @@ circle:nth-child(12n + 12) {
       height: 50px;
       width: 50px;
       margin-top: -24px;
-      background: url(../../pc/image/guide/handle-icon.png) no-repeat; }
+      background: url(../images/guide/handle-icon.png) no-repeat; }
   .process-container .handle-tab .handle-tab-btn a.active {
     color: #fff;
-    background: url(../../pc/image/guide/handle-icon.png) no-repeat 0 -741px; }
+    background: url(../images/guide/handle-icon.png) no-repeat 0 -741px; }
   .process-container .handle-tab .prompt-box .box {
     height: 386px;
     width: 1277px;
-    background: url(../../pc/image/guide/prompt.png) no-repeat;
+    background: url(../images/guide/prompt.png) no-repeat;
     margin: 0 auto;
     position: relative; }
     .process-container .handle-tab .prompt-box .box .title {
@@ -8655,7 +8655,7 @@ circle:nth-child(12n + 12) {
     position: relative;
     z-index: 2; }
   .process-container .handle-tab .handle-list li .pc-silder {
-    background: url(../../pc/image/guide/pc-silder-bg.png) no-repeat 0 0;
+    background: url(../images/guide/pc-silder-bg.png) no-repeat 0 0;
     position: relative; }
     .process-container .handle-tab .handle-list li .pc-silder .ber {
       position: absolute;
@@ -8685,7 +8685,7 @@ circle:nth-child(12n + 12) {
     .process-container .handle-tab .handle-list li .pc-silder .handle-silder-btn {
       margin: 38px auto 0;
       text-align: center;
-      background: url(../../pc/image/guide/red-line.png) repeat-x left center; }
+      background: url(../images/guide/red-line.png) repeat-x left center; }
       .process-container .handle-tab .handle-list li .pc-silder .handle-silder-btn a {
         display: block;
         float: left;
@@ -8706,7 +8706,7 @@ circle:nth-child(12n + 12) {
       .process-container .handle-tab .handle-list li .pc-silder .pc-silder-box .tempWrap {
         width: 1000px; }
   .process-container .handle-tab .handle-list li .pinkBj {
-    background: url(../../pc/image/guide/pink.png) no-repeat; }
+    background: url(../images/guide/pink.png) no-repeat; }
     .process-container .handle-tab .handle-list li .pinkBj .prev, .process-container .handle-tab .handle-list li .pinkBj .next {
       position: absolute;
       top: 50%;
@@ -8714,7 +8714,7 @@ circle:nth-child(12n + 12) {
       display: block;
       width: 41px;
       height: 122px;
-      background: url(../../pc/image/guide/handle-icon.png) no-repeat;
+      background: url(../images/guide/handle-icon.png) no-repeat;
       z-index: 3; }
     .process-container .handle-tab .handle-list li .pinkBj .prev {
       left: -2.5%;
@@ -8727,7 +8727,7 @@ circle:nth-child(12n + 12) {
     .process-container .handle-tab .handle-list li .pinkBj .next.nextStop {
       background-position: -84px -618px; }
   .process-container .handle-tab .handle-list li .withdrawSetBj {
-    background: url(../../pc/image/guide/withdraw-bj-bottom.png) no-repeat; }
+    background: url(../images/guide/withdraw-bj-bottom.png) no-repeat; }
     .process-container .handle-tab .handle-list li .withdrawSetBj .picScroll-left {
       position: relative;
       height: 95%; }
@@ -8738,7 +8738,7 @@ circle:nth-child(12n + 12) {
         display: block;
         width: 41px;
         height: 122px;
-        background: url(../../pc/image/guide/handle-icon.png) no-repeat;
+        background: url(../images/guide/handle-icon.png) no-repeat;
         z-index: 3; }
       .process-container .handle-tab .handle-list li .withdrawSetBj .picScroll-left .prev {
         left: -4.5%;
@@ -8754,7 +8754,7 @@ circle:nth-child(12n + 12) {
     width: 1030px;
     height: 700px;
     padding: 100px 124px 90px 124px;
-    background: url(../../pc/image/guide/mb-bj-slide.png) no-repeat;
+    background: url(../images/guide/mb-bj-slide.png) no-repeat;
     position: relative; }
     .process-container .handle-tab .handle-list li .mobile-silder .tempWrap {
       width: 1030px; }
@@ -8778,7 +8778,7 @@ circle:nth-child(12n + 12) {
         display: block;
         width: 41px;
         height: 122px;
-        background: url(../../pc/image/guide/handle-icon.png) no-repeat;
+        background: url(../images/guide/handle-icon.png) no-repeat;
         z-index: 3; }
       .process-container .handle-tab .handle-list li .mobile-silder .picScroll-left .prev {
         left: -4.5%;
@@ -8799,7 +8799,7 @@ circle:nth-child(12n + 12) {
       display: block;
       width: 41px;
       height: 122px;
-      background: url(../../pc/image/guide/handle-icon.png) no-repeat;
+      background: url(../images/guide/handle-icon.png) no-repeat;
       z-index: 3; }
     .process-container .handle-tab .box-1 .prev {
       left: -2.2%;

@@ -3,10 +3,9 @@ var router = express.Router();
 var bodyParser = require('body-parser');
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
 var connection = require('../config/database');
-var filter = require('../config/filter');
 
 /* GET home page. */
-router.get('/', filter.authorize, function (req, res, next) {
+router.get('/', function (req, res, next) {
     var modSql = 'SELECT * FROM websites';
     connection.query(modSql, function (err, result) {
         res.locals = {

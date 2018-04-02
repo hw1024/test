@@ -1,9 +1,10 @@
 
 exports.authorize = function(req, res, next) {
-	console.log(req.session.loginUser)
+  var originalUrl = req.originalUrl;
   if (!req.session.loginUser) {
-    res.redirect('/passport/login');
+    res.redirect(`/passport/login?redir=${originalUrl}`);
   } else {
     next();
+    
   }
 }

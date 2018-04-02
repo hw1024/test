@@ -10,11 +10,21 @@
 			</ul>
 			<ul class="fr clearfix">
 				<li class="userinfo fl">
-					<a href="/users?menuid=home" id="hello" class="hello">您好，
+					{{#if phone_show}}
+					<!--登录-->
+					<a href="/users/index" id="hello" class="hello">您好，
 						<span id="phone" class="main-color">
-							用户
+							{{ phone_show }}
 						</span>
 					</a>
+					<a href="/recharge?menuid=recharge" class="main-color">[充值]</a>
+					<a href="/passport/logout" id="dropout">[退出]</a>
+					{{else}}
+					<!--未登录-->
+					<a href="/passport/login" class="login">您好，请登录</a>
+					<span class="vline-sin"></span>
+					<a href="/passport/register" class="register main-color">免费注册</a>
+					{{/if}}
 				</li>
 				<li class="support fl" id="support-commond" data-support="<?=$support;?>">
 					<a data-support="problem" href="/about/problem">帮助中心</a>
@@ -27,7 +37,7 @@
 	<div class="header-nav">
 		<div class="outer-w clearfix">
 			<a class="nav-logo" href="/">
-				<img src="/images/logo.jpg?v={{version}}" alt="中普金服" title="中普金服">
+				<img src="/images/logo.jpg?v={{version}}" alt="" title="">
 			</a>
 			<div class="nav-list fr">
 				<ul class="clearfix">

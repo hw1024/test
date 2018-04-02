@@ -3,7 +3,6 @@ var router = express.Router();
 var bodyParser = require('body-parser');
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
 var connection = require('../config/database');
-
 /* GET home page. */
 router.get('/index', function (req, res, next) {
     var modSql = 'SELECT * FROM websites';
@@ -90,7 +89,8 @@ router.get('/partner', function (req, res, next) {
      * @return boolen
      */
 router.get('/contactWe', function (req, res, next) {
-    res.render('aboutus/contactWe', { title: '联系我们', header_role: 'aboutus', aboutus_role: 'contactWe' });
+    res.locals = { header_role: 'aboutus'}
+    res.render('aboutus/contactWe', { title: '联系我们', aboutus_role: 'contactWe' });
 });
 /**
      * 承诺函展示页面

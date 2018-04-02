@@ -30,10 +30,10 @@
 	</script>
 </head>
 <body>
-	{{>header}}
+	{{#if levelHead}} {{>header_passport}} {{else}} {{>header}} {{/if}}
 	{{#if_eq header_role 'aboutus'}} {{>aboutus_nav}} {{/if_eq}}
-    {{{body}}}
-	{{>footer}}
+	{{{body}}}
+	{{#if levelHead}} {{>footer_passport}} {{else}} {{>footer}} {{/if}}
 	<script>
 		require(['pages/hj_base', 'utility'], function (B, Util) {
 			var utility = new Util();

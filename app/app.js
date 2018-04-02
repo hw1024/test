@@ -6,6 +6,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var exphbs = require('express-handlebars');
 var hbsHelper = require('./utils/hbsHelper');
+var minimatch = require('minimatch');
 var commonConfig = require('./config/common_config');
 
 var index = require('./routes/index');
@@ -56,6 +57,16 @@ app.use(session({
     maxAge: null  // 有效期，单位是毫秒
   }
 }));
+// 获取用户信息 
+app.all('*', function (req, res, next) {
+  console.log(req.originalUrl)
+  let userName = req.session.loginUser;
+  let originalUrl = req.originalUrl;
+  var levelHead = minimatch(originalUrl, '/passport/**');
+  app.locals.levelHead = levelHead;
+  app.locals.phone_show = userName;
+  next()
+});
 app.use('/', index);
 app.use('/invest', invest);
 app.use('/loan', loan);
@@ -65,13 +76,14 @@ app.use('/about', about);
 app.use('/passport', passport);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
+  console.log(req)
   var err = new Error('Not Found');
   err.status = 404;
   next(err);
 });
-
 // error handler
 app.use(function(err, req, res, next) {
+  
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};

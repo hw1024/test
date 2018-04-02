@@ -1,4 +1,4 @@
-<section class="container">
+<!-- <section class="container">
 	<div class="panel-body">
      <form method="POST" action="/login">
         <input type="text" id="name" name="name" value="chyingp" />
@@ -6,26 +6,66 @@
         <input type="submit" value="登录" id="login" />
     </form> 
 	</div>
+</section> -->
+<section class="ksx-container">
+  <div class="passport-container">
+    <div class="login-box">
+      <div class="login-banner">
+        <a href="javascript:void(0);">
+          <img src="/images/login-banner.jpg?v={{ version }}" alt="login">
+        </a>
+      </div>
+      <div class="login-content outer-w">
+        <div class="login-wrap">
+          <div class="title">
+            <h3>登录中普金服</h3>
+            <a href="/passport/register">没有账号？马上注册</a>
+          </div>
+          <form name="login" id="login">
+            <ul class="txt-form">
+              <li>
+                <i class="icon-mobile"></i>
+                <input type="hidden" name="callback" id="callback" value="{{ callback }}">
+                  <input type="text" id="mobile" name="mobile" value="" placeholder="请输入您的手机号">
+              </li>
+              <li>
+                <i class="icon-pwd"></i>
+                <input type="password" name="password" id="password" placeholder="请输入密码" value="">
+              </li>
+              <li class="find-pwd clearfix">
+                <a href="/passport/find_pwd/<?=$mobile;?>" class="fr">忘记密码?</a>
+              </li>
+              <li>
+                <div class="y-btn" id="login-sub">立即登录</div>
+              </li>
+              <p class="tips"></p>
+            </ul>
+          </form>
+          <div class="step">银行全程存管</div>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
-<div class="alert-tips" id="alert-tips"></div>
 <script type="text/javascript">
-  $('#login').click(function(evt){
+  $('#login-sub').click(function(evt){
     evt.preventDefault();
     $.ajax({
         url: '/passport/ajax_login',
         type: 'POST',
         dataType:'json',
         data: {
-            name: $('#name').val(),
-            password: $('#password').val()
+          name: $('#mobile').val(),
+          password: $('#password').val(),
+          callback: $('#callback').val()
         },
         success: function(data){
           if(data.code == 200){ 
             setTimeout(function(){
-              window.location.href = '/';
+              window.location.href = data.url;
             },1000)   
           } else {
-            tips_message(data.message,'error');
+            alert(data.message,'error');
           }
         }
     });
