@@ -9089,3 +9089,26 @@ circle:nth-child(12n + 12) {
   left: 10px;
   right: 10px;
 }
+/**loading**/
+div.instructions_container{float:left;width:350px;margin-right:50px}
+div#activity_pane{float:left;width:350px;height:200px;border:1px solid #CCC;background-color:#EEE;padding-top:200px;text-align:center}
+div.example_links .link_category{margin-bottom:15px}
+.loading-indicator-bars{background-image:url(https://raw.githubusercontent.com/riverbed/flyscript-portal/master/thirdparty/showLoading/images/loading-bars.gif);width:150px}
+.loading-indicator{padding:20px 0;height:80px;width:80px;background:url(../images/loading-0.gif);background-repeat:no-repeat;background-position:center center}
+.loading-indicator-overlay{background-color:#FFF;opacity:.6;filter:alpha(opacity=60)}
+/**progress**/
+.statistic-line{ position: relative; height: 16px; text-align: center; background-color: #f2f2f2; border-radius: 15px;}
+.statistic-line .progress-data{ width: 0; height: 16px; line-height: 100%; text-align: center; border-radius: 15px; background: #fcc998;
+ background: -webkit-linear-gradient(to right,#fcc998,#FFB735);
+ background: -moz-linear-gradient(to right,#fcc998,#FFB735);
+ background: -o-linear-gradient(to right,#fcc998,#FFB735);
+ background: -webkit-gradient(linear,100% 0,0 0,from(#fcc998),to(#FFB735));
+ background: linear-gradient(to right,#fcc998,#FFB735);
+ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fcc998', endColorstr='#FFB735', GradientType=0 );}
+.statistic-line span{ position: absolute; top: 0; right: 50%; margin-right: -20px; line-height: 16px; font-size: 14px; color: #fa6900;}
+/**page**/
+.pagination{margin:20px auto;text-align:center}
+.pagination a{text-decoration:none;border:1px solid #AAE;color:#666}
+.pagination a,.pagination span{display:inline-block;padding:10px 15px;margin-left:-1px;margin-bottom:5px;color:#666;background-color:#f5f5f5;border:solid 1px #ddd;font-size:12px}
+.pagination .current{background:#fff;color:#666;border:solid 1px #ddd}
+.pagination .current.next,.pagination .current.prev{color:#999;border-color:#666;background:#f5f5f5;border:solid 1px #ddd}

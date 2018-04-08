@@ -3,12 +3,148 @@
  * Create by hw on 2016/12/13
  */
 ;
-define(["require", 'module'], function(require, module) {
+define(["require", "module", "pagination", "tmpl", "showloading"], function (require, module, pagination, tmpl, showloading) {
     /**
      * @class Util
      * @constructor
      */
     function Util() {}
+    /**
+     *  tabPageData 多标签页数据加载
+     * 
+     */
+    Util.prototype.tabPageData = function (options) {
+        var that = this;
+        options = $.extend({ initPage: true }, options);
+        if ($('.userData-tab').length > 0) {
+            if (options.slideIndex) {
+                options.slideIndex();
+            } else {
+                //判断是否需要首次加载
+                if ($(".dataContainer:first").find('.pagination').length > 0) {
+                    var pageContainer = $('.pagination:first');
+                    if (pageContainer.is(':empty')) {
+                        pageContainer.data('data', pageContainer.siblings('form').serialize());
+                        that.loadData(0, pageContainer, options);
+                    }
+                };
+            }
+            //多标签切换数据
+            $('.userData-tab a').on('click', function () {
+                var $t = $(this), index = $t.index(), dataContainer = $(".dataContainer").eq(index);
+                $(this).addClass('cur').siblings().removeClass('cur');
+                dataContainer.show().siblings().hide();
+
+                var pageContainer = dataContainer.find('.pagination');
+                if (pageContainer.is(':empty') || dataContainer.attr('reload') == 'true') {
+                    pageContainer.data('data', dataContainer.find('form').serialize());
+                    that.loadData(0, pageContainer, options);
+                }
+            });
+        } else {
+            var pageContainer = $('.pagination:first');
+            if (pageContainer.is(':empty')) {
+                pageContainer.data('data', pageContainer.siblings('form').serialize());
+                that.loadData(0, pageContainer, options);
+            }
+        }
+    }
+     /**
+     *  searchData 搜索数据加载
+     * 
+     */
+    Util.prototype.searchData = function () {
+        var that = this;
+        $('a.btn-search').parents('form').submit(function () {
+            $(this).find('a.btn-search').click();
+            return false;
+        }).end().on('click', function () {
+            var $t = $(this),
+                dataContainer = $t.parents('div.dataContainer'),
+                pageContainer = dataContainer.find('div.pagination');
+            pageContainer.data('data', dataContainer.find('form').serialize());
+            that.loadData(0, pageContainer, {
+                initPage: true
+            });
+            return false;
+        });
+    }
+    /**
+     *  loadData 分页数据
+     * @param {[type]} currPage 页码
+     * @param {[type]} pageContainer 翻页容器
+     */
+    Util.prototype.loadData = function (currPage, pageContainer, options) {
+        var that = this;
+        var dataContainer = pageContainer.parents('.dataContainer');
+        listContainer = $('.listContainer', dataContainer),
+            form = dataContainer.find("form");
+        if (!options) {
+            options = pageContainer.data('options');
+        } else {
+            var pageOptions = {};
+            $.extend(pageOptions, options, { initPage: null });
+            pageContainer.data('options', pageOptions);
+        }
+        options = $.extend({
+            url: form.attr('action'),
+            data: form.serialize()
+        }, options);
+        var formData = 'page=' + (++currPage) + '&' + options.data;
+
+        var loadContainer = options.loadContainer || dataContainer;
+        loadContainer.showLoading();
+        $.ajax({
+            url: options.url,
+            data: formData,
+            method: 'post',
+            dataType: 'json',
+            success: function (data) {
+                if (options.dataWrapper) {
+                    data = options.dataWrapper(data);
+                }
+                loadContainer.hideLoading();
+                listContainer.children("tr,li,div").detach();
+                if (data.ok) {
+                    if (data.value.page.endRow <= 0) {
+                        $(pageContainer).html('<div class="empty">\
+                        <img src="/images/apu-empty.png?v=20180202" alt="apu">\
+                        <p>暂无可投标的！</p>\
+                        </div>');
+                    } else {
+                        $('#listTemplate', dataContainer).tmpl(data.value.pageBean).appendTo(listContainer);
+                        if (options.initPage) {
+                            dataContainer.removeAttr('reload');
+                            that.loadPage(data.value.page.totalCount, data.value.page.limit, dataContainer);
+                        }
+                    }
+                } else {
+                    listContainer.html('<p class="tc pd-10">' + data.msg + '</p>')
+                }
+                if (options.callback) {
+                    options.callback();
+                }
+            }
+        });
+    }
+    /**
+     * loadPage 分页
+     * @param {[type]} totalCount 总页码
+     * @param {[type]} pageSize 当前页
+     * @param {[type]} dataContainer 数据容器
+     */
+    Util.prototype.loadPage = function (totalCount, pageSize, dataContainer) {
+        var that = this;
+        $('div.pagination', dataContainer).pagination(totalCount, {
+            num_edge_entries: 2,
+            num_display_entries: 4,
+            prev_text: "上一页",
+            next_text: "下一页",
+            link_to: "javascript:void(0);",
+            callback: that.loadData,
+            items_per_page: pageSize
+        });
+    }
     /**
      * roundFixed  保留小数点
      * @param  {[type]} num     [description]

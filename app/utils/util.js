@@ -14,6 +14,5 @@ exports.get = function (fileName, key) {
     }catch(e) {
         sys.debug('JSON parse fails')
     }
-    console.log(configJson)
-    return configJson //返回需要的key值配置信息
+    return configJson[key] //返回需要的key值配置信息
 }

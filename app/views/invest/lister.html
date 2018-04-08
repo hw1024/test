@@ -1,3 +1,144 @@
 <section class="ksx-container">
-    invest
+    <div class="list-banner"></div>
+    <div class="list-filter">
+        <div class="filter-wrap outer-w">
+            <ul class="clearfix">
+                <li>
+                    <a class="cur" href="javascript:void(0);">优选项目</a>
+                </li>
+                <li>
+                    <a href="/invest_swap/lister">债权转让</a>
+                </li>
+            </ul>
+            <dl class="clearfix">
+                <dt class="fl">排序：</dt>
+                <dd class="fl" id="car_term_types" data-type="sort_by">
+                    <a data-id="999_sort_by" href="javascript:void(0)" class="cur one">默认</a>
+                    <a data-id="1_sort_by" href="javascript:void(0)">年化收益率
+                        <span>
+                            <i class="icon_top" data-id="1_sort_dir"></i>
+                            <i class="icon_bom" data-id="2_sort_dir"></i>
+                        </span>
+                    </a>
+                    <a data-id="2_sort_by" href="javascript:void(0)">出借期限
+                        <span>
+                            <i class="icon_top" data-id="1_sort_dir"></i>
+                            <i class="icon_bom" data-id="2_sort_dir"></i>
+                        </span>
+                    </a>
+                </dd>
+            </dl>
+        </div>
+    </div>
+    <div class="clist-content outer-w dataContainer clearfix">
+        <form action="/invest/ajax_list">
+            <input type="hidden" name="status" value="">
+        </form>
+        <ul class="clist-item listContainer">
+            <script id="listTemplate" type="text/x-jquery-tmpl">
+            <li class="clearfix">
+                <div class="clearfix clist-item-title">
+                    <a href="/invest/detail/${id}">${name}</a>
+                </div>
+                <dl class="item">
+                    <dt>
+                        <var class="main-color">${apr}</var>
+                        <span class="item-sub">%</span>
+                    </dt>
+                    <dd>往期年化收益率</dd>
+                </dl>
+                <dl class="item item3">
+                    <dt>
+                        <var class="main-color">${time_limit}</var>
+                        <span class="item-sub">${style}</span>
+                    </dt>
+                    <dd>项目期限</dd>
+                </dl>
+                <dl class="item item-220">
+                    <dt>${style}</dt>
+                    <dd>还款方式</dd>
+                </dl>
+                <dl class="item">
+                    <dt>
+                        <var class="main-color">${account / 10000}</var>
+                        <span class="item-sub">万</span>
+                    </dt>
+                    <dd>项目金额</dd>
+                </dl>
+                <dl class="item">
+                    <dt>剩余可投0.00元</dt>
+                    <dd class="info-progress">
+                        <div class="bar">
+                            <div class="inner" style="width:100%"></div>
+                        </div>
+                    </dd>
+                </dl>
+                <dl class="item">
+                    <a href="/invest/detail/${borrow_id}" target="_blank" class="y-btn invest_btn">正在计息中</a>
+                </dl>
+            </li>
+            </script>
+        </ul>
+        <div class="pagination"></div>
+    </div>
+    <!-- <div class="uc-right outer-w">
+        <div class="uc-right-top">
+            <h3>借款管理</h3>
+        </div>
+        <div class="uc-right-con">
+            <div class="userData">
+                <div class="userData-tab">
+                    <a class="cur" href="javascript:;">我的借款</a>
+                    <a href="javascript:;">待还款列表</a>
+                    <a href="javascript:;">已还款列表</a>
+                </div>
+                <div class="userData-box">
+                    <div class="dataContainer">
+                        <form action="/invest/ajax_list">
+                            <input type="hidden" name="status" value="">
+                        </form>
+                        <table class="simple">
+                            <thead>
+                                <tr>
+                                    <th>借款名称</th>
+                                    <th>借款金额</th>
+                                    <th>当前期数/总期数</th>
+                                    <th>还款总额</th>
+                                    <th>预期还款时间</th>
+                                    <th>状态</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody class="listContainer">
+                                <script id="listTemplate" type="text/x-jquery-tmpl">
+                                    <tr>
+                                        <td>
+                                            <a href="/p2p/borrow/details/${id}" class="c-fa6">
+                                                ${id}
+                                            </a>
+                                        </td>
+                                        <td>${name}</td>
+                                        <td>${period}</td>
+                                        <td><i class="fw">${account}</i></td>
+                                        <td>${apr}</td>
+                                        <td>
+                                            ${status}
+                                        </td>
+                                        <td><a data="${id}" href="javascript:;" class="btn btn-orange btn-small operate">查看</a></td>
+                                    </tr>
+                                </script>
+                            </tbody>
+                        </table>
+                        <div class="pagination"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> -->
 </section>
+<script type="text/javascript">
+    require(['utility'], function (Util) {
+        var utility = new Util();
+        utility.tabPageData();
+    });
+</script>

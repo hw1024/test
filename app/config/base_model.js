@@ -12,7 +12,6 @@ module.exports = function () {
     /* 数据库查询接口 */
     this.fineAllData = function (tableName, callback) {
         dbClient.query('SELECT * FROM ' + tableName, function (error, results) {
-            /* 回调处理MySQL连接结果 */
             if (error) {
                 console.log('GetData Error: ' + error.message);
                 dbClient.end()
@@ -25,7 +24,6 @@ module.exports = function () {
     /* 数据库查询接口 */
     this.fineOneById = function (tableName, idJson, callback) {
         dbClient.query('SELECT * FROM ' + tableName + ' where ?', idJson,  function (error, results) {
-            /* 回调处理MySQL连接结果 */
             if (error) {
                 console.log('GetData Error: ' + error.message);
                 dbClient.end()
@@ -41,7 +39,7 @@ module.exports = function () {
     }
     /* 数据库插入接口 */
     this.insert = function (tableNmae, rowInfo, callback) {
-        dbClient.query('INSERT * INTO ' + tableName + ' SET ? ', rowInfo, function (error, results) {
+        dbClient.query('INSERT * INTO ' + tableName + ' SET ?', rowInfo, function (error, results) {
             if (error) throw error
             callback(results.insertId);
         });
@@ -60,7 +58,7 @@ module.exports = function () {
         });
     }
     /* 数据库删除接口 */
-    this.remove = function (table, idJson, callback) {
+    this.remove = function (tableName, idJson, callback) {
         dbClient.query('delete from ' + tableName + ' where ?', idJson, function (error, results) {
             if (error) {
                 console.log('ClientResady Error: ' + error.message)
@@ -71,8 +69,64 @@ module.exports = function () {
 
         });
     }
-    /* 数据库条件查询接口 */
-    this.find = function (table, whereJson, orderByJson, limitArr, fieldsArr, callback) {
+     /**
+     * @desc  数据库查询数据总数
+     * @param {*} tableName  string
+     * @param {*} callback  function
+     * @return null
+     */
+    this.fineCount = function (tableName, callback) {
+        dbClient.query('SELECT COUNT(*) as total FROM ' + tableName, function (error, results) {
+            if (error) {
+                console.log('GetData Error: ' + error.message);
+                dbClient.end()
+                callback(false);
+            } else {
+                callback(results);
+            }
+        });
+    }
+    /**
+     * @desc  数据库条件查询接口
+     * @param {*} tableName  string
+     * @param {*} whereJson json desc(and和or区别，其中的条件为key值、连接符大于小于还是等于value值)
+     * @param {*} orderByJson json desc({'key':'time','type':'desc'})
+     * @param {*} limitArr array desc (第一个元素是返回偏移量，第二个元素是返回数量，如果为空则返回全部)
+     * @param {*} fieldsArr array desc (返回那些字段)
+     * @param {*} callback  function
+     * @return null
+     */
+    this.find = function (tableName, whereJson, orderByJson, limitArr, fieldsArr, callback) {
+        var andWhere = whereJson['and'],
+            orWhere = whereJson['or'],
+            andArr = [],
+            orArr = [];
+        /*将数组转化为where and条件 array */
+        for (var i = 0; i < andWhere.length; i++) {
+            andArr.push(andWhere[i]['key'] + andWhere[i]['opts'] + andWhere[i]['value'] );
+        };
+        /*将数组转化为where or条件 array */
+        for (var i = 0; i < orWhere.length; i++) {
+            orArr.push(orWhere[i]['key'] + orWhere[i]['opts'] + orWhere[i]['value']);
+        };
+        /*判断条件是否存在，如果存在则转换相应的添加语句 */
+        var filedsStr = fieldsArr.length>0 ? fieldsArr.join(',') : '*',
+            andStr = andArr.length> 0 ? andArr.join(' and ') : '',
+            orStr = orArr.length> 0 ? ' or ' + orArr.join(' or ') : '',
+            limitStr = limitArr.length> 0 ? ` limit ${limitArr.join(',')}` : '',
+            orderStr = orderByJson ? ` order by ${orderByJson['key']} ${orderByJson['type']}` : '';
+        var sql = 'SELECT ' + filedsStr + ' FROM ' + tableName + ' where ' + andStr + orStr + orderStr + limitStr;
+        console.log(sql)
+        dbClient.query('SELECT ' + filedsStr + ' FROM ' + tableName + ' where ' + andStr + orStr + orderStr + limitStr, function (error, results) {
+            if (error) {
+                console.log('GetData Error: ' + error.message);
+                dbClient.end()
+                callback(false);
+            } else {
+                callback(results);
+            }
+
+        });
     }
     function _constructor() {
         var dbConfig = Util.get('./config/config.json', 'db'); //读取config.json配置文件，并获取其中db的配置文件信息

@@ -3,7 +3,8 @@ var router = express.Router();
 var bodyParser = require('body-parser');
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
 var connection = require('../config/database');
-
+var BaseModel = require('../config/base_model');
+var baseModel = new BaseModel();
 /* GET home page. */
 router.get('/login', function(req, res, next) {
   var redir = req.query.redir || '/';
@@ -34,35 +35,26 @@ router.post('/ajax_login', function(req, res, next){
   var  name = req.body.name;
   var  pwd = req.body.password;
   var  callback = req.body.callback;
-  // req.assert('name', 'Name is required').notEmpty();
-  // req.assert('pwd', 'pwd is required').notEmpty();
-  // var errors = req.validationErrors();  
-
-  // if (errors) {
-  //   return res.json({code: 300, message: errors});
-  // };
   if(name == "") return res.json({code: 300, message: '用户名不能为空'}); 
   if(pwd == "") return res.json({code: 300, message: '密码不能为空'});
-  var  selectSQL = "select * from users where uname = '"+name+"'";
-  connection.query(selectSQL,function (err,rs) {
-      if (err) throw  err;
-      if(rs != ""){
-        rs.forEach(function(item, index){
-          if (item.uname === name && item.upwd === pwd) {
-            req.session.regenerate(function(err) {
-              if(err){
-                return res.json({code: 300, message: '登录失败'});                
-              }
-              req.session.loginUser = name;
-              res.json({ code: 200, message: '登录成功', url: callback});                         
-            });   
-          } else {
-            res.json({code: 300, message: '账号或密码错误'});       
-          }
-        });
-      } else {
-        res.json({code: 300, message: '账号不存在'});  
-      }    
+  var tableName = 'users';
+  var idJson = {uname: `${name}`}
+  baseModel.fineOneById(tableName, idJson, function (rs) {
+    if(rs != ""){
+        if (rs.uname === name && rs.upwd === pwd) {
+          req.session.regenerate(function(err) {
+            if(err){
+              return res.json({code: 300, message: '登录失败'});                
+            }
+            req.session.loginUser = name;
+            res.json({ code: 200, message: '登录成功', url: callback});                         
+          });   
+        } else {
+          res.json({code: 300, message: '账号或密码错误'});       
+        }
+    } else {
+      res.json({code: 300, message: '账号不存在'});  
+    }    
   })   
 });
 

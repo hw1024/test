@@ -2,24 +2,83 @@ var express = require('express');
 var router = express.Router();
 var bodyParser = require('body-parser');
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
-var connection = require('../config/database');
-
+var BaseModel = require('../config/base_model');
+var baseModel = new BaseModel();
 /* GET home page. */
 router.get('/lister', function (req, res, next) {
-    var modSql = 'SELECT * FROM websites';
-    connection.query(modSql, function (err, result) {
-        res.locals = {
-            result: result,
-            time: '2018-03-28 23:59:59',
-            avg_each: '111509.73',
-            avg_borrow: '111842.93',
-            borrow_num: '1004',
-            borrow_array1: '1000.00',
-            borrow_array2: '10.01',
-            borrow_array3: '100.30'
+    res.render('invest/lister', { title: '我要出借', header_role: 'invest' });
+});
+router.post('/ajax_list', function (req, res, next) {
+    var endRow,
+        firstPage,
+        hasNextPag,
+        hasPrePage,
+        lastPage,
+        limit = 10,
+        nextPage,
+        offset,
+        page = Number(req.body.page),
+        prePage,
+        totalCount,
+        totalPages;
+    var tableName = 'hj_borrow';
+    var whereJson = {
+        'and': [{ 'key': 'id', 'opts': '>', 'value': 1}],
+        'or': [{ 'key': 'id', 'opts': '<', 'value': 10000 }]
+    };
+    var orderByJson = { 'key': 'id','type': 'asc'};
+    var fieldsArr = [];
+    var limitArr = [((page-1)*limit), limit];
+    baseModel.fineCount(tableName, function (rows) {
+        totalCount = rows[0].total;
+        totalPages = Math.ceil(totalCount / limit);
+        endRow = page * limit;
+        nextPage = page + 1;
+        offset = (page - 1) * limit;
+        if (page == 1) {
+            firstPage = true;
+            hasNextPage = true;
+            hasPrePage = false;
+            lastPage = false;
+            prePage = 1
+        } else if (page == totalPages) {
+            firstPage = false;
+            hasNextPage = false;
+            hasPrePage = true;
+            lastPage = true;
+            prePage = page - 1;
+            endRow = totalCount;
+        } else {
+            firstPage = false;
+            hasNextPage = true;
+            hasPrePage = true;
+            lastPage = false;
+            prePage = page - 1
         }
-        res.render('invest/lister', { title: '我要出借', header_role: 'invest' });
-    });
+        if (totalCount == 0) endRow = 0;
+    })
+    baseModel.find(tableName, whereJson, orderByJson, limitArr, fieldsArr, function (result) {
+        value = {
+            pageBean: result,
+            page: {
+                endRow: endRow,
+                firstPage: firstPage,
+                hasNextPage: hasNextPage,
+                hasPrePage: hasPrePage,
+                lastPage: lastPage,
+                limit: limit,
+                nextPage: nextPage,
+                offset: offset,
+                page: page,
+                prePage: prePage,
+                totalCount: totalCount,
+                totalPages: totalPages
+            }
+        }
+        res.json({
+            code: 200, message: '成功', ok: true, value: value
+        });
+    })
 });
 
 module.exports = router;
